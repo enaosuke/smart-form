@@ -1,0 +1,313 @@
+@use 'variables';
+
+$bp-registration-inline: 768px;
+
+@mixin registration-field-inline-grid {
+  display: grid;
+  grid-template-columns: minmax(11rem, 34%) 1fr;
+  column-gap: var(--space-md);
+  row-gap: var(--space-sm);
+  align-items: start;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  font-family: var(--font-family-base);
+}
+
+body {
+  margin: 0;
+  font-family: inherit;
+  font-size: var(--font-size-input);
+  line-height: 1.5;
+  color: var(--color-text-primary);
+  background: var(--color-bg-page);
+}
+
+// Shared form field block (BEM)
+.form-field {
+  margin-bottom: var(--space-lg);
+}
+
+// 未満は縦積みのまま。メルマガだけ Field 直下に shell が無いので :has を分けている。
+@media (min-width: $bp-registration-inline) {
+  .registration-page {
+    max-width: min(var(--layout-max-form-wide), 100%);
+    padding-left: var(--space-lg);
+    padding-right: var(--space-lg);
+  }
+
+  .registration-form-fields .form-field:has(.form-field-shell) {
+    @include registration-field-inline-grid;
+  }
+
+  .registration-form-fields .form-field:has(.form-field-shell) .form-field-shell {
+    display: contents;
+  }
+
+  .registration-form-fields .form-field:has(.form-field-shell) .form-field-shell > .base-label {
+    grid-column: 1;
+    margin-top: var(--space-md);
+    margin-bottom: 0;
+    align-self: start;
+  }
+
+  .registration-form-fields .form-field:has(.form-field-shell) .form-field-shell > *:not(.base-label) {
+    grid-column: 2;
+    min-width: 0;
+  }
+
+  .registration-form-fields .form-field:has(.base-radio-group) {
+    @include registration-field-inline-grid;
+  }
+
+  .registration-form-fields .form-field:has(.base-radio-group) > div {
+    display: contents;
+  }
+
+  .registration-form-fields .form-field:has(.base-radio-group) .base-radio-group {
+    grid-column: 1 / -1;
+    @include registration-field-inline-grid;
+    min-width: 0;
+  }
+
+  .registration-form-fields .form-field:has(.base-radio-group) .base-radio-group__legend {
+    grid-column: 1;
+    margin-bottom: 0;
+    align-self: start;
+  }
+
+  .registration-form-fields .form-field:has(.base-radio-group) .base-radio-group__hint {
+    grid-column: 2;
+    margin-bottom: var(--space-sm);
+  }
+
+  .registration-form-fields .form-field:has(.base-radio-group) .base-radio-group__options {
+    grid-column: 2;
+    min-width: 0;
+  }
+
+  .registration-form-fields .form-field:has(.base-radio-group) .base-error-message {
+    grid-column: 2;
+    min-width: 0;
+  }
+}
+
+.form-field__hint {
+  margin: var(--space-xs) 0 0;
+  font-size: var(--font-size-hint);
+  color: var(--color-text-muted);
+}
+
+.form-field__zip-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.form-field__zip-row-input {
+  flex: 1 1 144px;
+  min-width: 0;
+}
+
+// Page layout
+.registration-page {
+  min-height: 100vh;
+  padding: var(--space-md) var(--space-md) var(--space-xl);
+  max-width: var(--layout-max-form);
+  margin: 0 auto;
+}
+
+.registration-page__header {
+  margin-bottom: var(--space-lg);
+  padding-bottom: var(--space-md);
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.registration-page__title {
+  margin: 0 0 var(--space-sm);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-accent);
+  letter-spacing: 0.02em;
+}
+
+.registration-page__lead {
+  margin: 0;
+  font-size: var(--font-size-hint);
+  font-weight: 400;
+  line-height: 1.55;
+  color: var(--color-text-muted);
+}
+
+.registration-page__actions {
+  margin-top: var(--space-xl);
+}
+
+.registration-page__toast {
+  margin-bottom: var(--space-lg);
+  padding: var(--space-md);
+  border-radius: var(--radius-input);
+  background: var(--color-toast-success-bg);
+  border: 1px solid var(--color-success-border);
+  color: var(--color-success-text);
+  font-size: var(--font-size-label);
+}
+
+.registration-page__toast[aria-hidden='true'] {
+  display: none;
+}
+
+.member-form__submit {
+  display: block;
+  margin-inline: auto;
+  max-width: 200px;
+  width: 100%;
+  min-height: var(--size-control-min-height);
+  padding: var(--space-md) var(--space-lg);
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-input);
+  font-weight: 700;
+  color: var(--color-accent-contrast);
+  background: var(--color-accent);
+  border: none;
+  border-radius: var(--radius-button);
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.15s ease, opacity 0.2s ease;
+
+  &:hover:not(:disabled) {
+    filter: brightness(1.05);
+  }
+
+  &:active:not(:disabled) {
+    transform: scale(0.99);
+  }
+
+  &:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-border-focus);
+    outline-offset: 4px;
+  }
+}
+
+/** 確認画面の「修正する」などセカンダリ */
+.member-form__submit--secondary {
+  color: var(--color-accent);
+  background: var(--color-bg-page);
+  border: 2px solid var(--color-accent);
+
+  &:hover:not(:disabled) {
+    filter: none;
+    background: var(--color-email-suggest-bg);
+  }
+
+  &:disabled {
+    opacity: 0.55;
+  }
+}
+
+/** 郵便番号欄横（配色・角丸・ホバー等は .member-form__submit と同じ） */
+.member-form__submit--zip-inline {
+  width: auto;
+  flex: 0 0 auto;
+  min-width: 8rem;
+  min-height: var(--size-control-min-height);
+  padding: var(--space-sm) var(--space-md);
+  line-height: 1.3;
+  text-align: center;
+  white-space: normal;
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-label);
+  color: var(--color-accent-contrast);
+  background: var(--color-text-primary);
+  border: none;
+  border-radius: var(--radius-button);
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.15s ease, opacity 0.2s ease;
+
+  &:hover:not(:disabled) {
+    filter: brightness(1.05);
+  }
+
+  &:active:not(:disabled) {
+    transform: scale(0.99);
+  }
+
+  &:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-border-focus);
+    outline-offset: 4px;
+  }
+}
+
+.member-form__link {
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+
+  &:focus-visible {
+    outline: 2px solid var(--color-border-focus);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+}
+
+.email-suggest {
+  list-style: none;
+  margin: var(--space-sm) 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+/* 視覚では隠すが読み上げ対象に残す（補足説明用） */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.email-suggest__btn {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-sm) var(--space-md);
+  font-size: var(--font-size-hint);
+  font-family: var(--font-family-base);
+  color: var(--color-accent);
+  background: var(--color-email-suggest-bg);
+  border: 1px solid var(--color-email-suggest-border);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+
+  &:hover {
+    background: var(--color-email-suggest-bg-hover);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-border-focus);
+    outline-offset: 2px;
+  }
+}

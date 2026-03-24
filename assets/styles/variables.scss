@@ -1,0 +1,76 @@
+// グローバル設計トークン（CSS カスタムプロパティ）
+// コンポーネントからは var(--token-name) で参照。form.scss から @use して読み込む。
+
+:root {
+  --color-bg-page: #ffffff;
+  --color-text-primary: #1a202c;
+  --color-text-label: #4a5568;
+  /**
+   * プレースホルダー・フロート未入力ラベル。
+   * #f7fafc 上で WCAG AA 4.5:1 を満たす範囲で最も明るい等方グレー（#747474 は 4.46 で不合格）。
+   */
+  --color-text-placeholder: #737373;
+  /** ヒント・補助（body 直置き含む）— 小さめ文字でも AA */
+  --color-text-muted: #3d4d5d;
+
+  --color-input-bg: #f7fafc;
+  --color-input-bg-focus: #ffffff;
+  --color-border-focus: #2d3748;
+  --color-border-error: #e53e3e;
+  --color-error-text: #c53030;
+  --color-error-bg-tint: #fff5f5;
+
+  --color-success-border: #38a169;
+  --color-success-text: #276749;
+
+  --color-accent: #2c5282;
+  --color-accent-contrast: #ffffff;
+
+  --color-border-subtle: #e2e8f0;
+  --color-toast-success-bg: #f0fff4;
+  --color-email-suggest-bg: #ebf4ff;
+  --color-email-suggest-border: var(--color-border-subtle);
+  --color-email-suggest-bg-hover: #dbeafe;
+
+  --color-password-weak: var(--color-border-error);
+  --color-password-fair: #dd6b20;
+  --color-password-good: #d69e2e;
+  --color-password-strong: var(--color-success-border);
+
+  --radius-input: 8px;
+  --radius-button: 8px;
+
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+
+  --layout-max-form: 1000px;
+  /** 768px 以上でフォームをラベル横並びにしたときのページ最大幅 */
+  --layout-max-form-wide: 42rem;
+
+  --size-control-min-height: 56px;
+  --space-control-inline-end: 48px;
+  /** クリア＋パスワード表示の両方: 80 = 10×8 */
+  --space-control-inline-end-dual: 80px;
+
+  --size-icon-hit: 32px;
+
+  --size-textarea-min-height: 128px;
+
+  --font-family-base: ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+    'Segoe UI Symbol', 'Noto Color Emoji';
+  --font-size-label: 0.875rem;
+  --font-size-input: 1rem;
+  --font-size-hint: 0.8125rem;
+  --font-size-error: 0.8125rem;
+  /** 補足の一段小さいテキスト（ページリードなど） */
+  --font-size-caption: 0.75rem;
+
+  --transition-input: border-color 0.2s ease-in-out, background-color 0.2s ease-in-out,
+    box-shadow 0.2s ease-in-out;
+  --transition-error: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+
+  --shadow-focus: 0 0 0 4px rgba(45, 55, 72, 0.25);
+}

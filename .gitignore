@@ -1,0 +1,12 @@
+node_modules
+.nuxt
+.output
+dist
+*.log
+.DS_Store
+storybook-static
+
+# Cursor ローカル状態（チャット・キャッシュ等）。共有ルールは .cursor/rules を追跡する
+.cursor/**
+!.cursor/rules/
+!.cursor/rules/**
