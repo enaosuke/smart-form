@@ -13,6 +13,16 @@ https://enaosuke.github.io/smart-form/
 - Font Awesome（アイコン）
 - Storybook（コンポーネント開発用）
 
+## Lighthouse（2026年3月24日）
+
+### Desktop
+
+![Lighthouse Desktop](docs/images/lighthouse/desktop.png)
+
+### Mobile
+
+![Lighthouse Mobile](docs/images/lighthouse/mobile.png)
+
 ## ライセンス・免責
 
 このリポジトリは登録処理はダミーであり、実サービスへの接続は行いません。
